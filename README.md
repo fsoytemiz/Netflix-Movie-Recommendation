@@ -1,6 +1,6 @@
 # Netflix-Movie-Recommendation
 
-This folder contains the work for a Netflix Prize project. 
+This folder contains the work for a Netflix Prize Data. 
 The goal of this project is to create a personalized movie scoring and recommendation system based on the user's previous movie ratings
 through machine learning training. The recommender system will be able to predict users rating for a new movie they haven't seen.
 
