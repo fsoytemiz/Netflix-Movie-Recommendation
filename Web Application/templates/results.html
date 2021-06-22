@@ -1,0 +1,38 @@
+{% block content %}
+<div class="card-columns">
+    {% for item in results %}
+        <div class="card" style="width: 30rem;height: 18rem;">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <div class="card-body">
+            <h5 class="card-title">{{ item[2] }}</h5>
+            <p class="card-text">Release year {{ item[1] }}</p>
+            <!-- <span class="btn btn-primary">Rate it</span> -->
+    
+            <!-- Rating Thing  -->
+    
+            <div>
+                <button onclick="rated(1,{{ item[0] }});">
+                    <span id = '{{item[0]}}star1' class="fa fa-star unchecked"></span>
+                </button>
+                <button onclick="rated(2,{{ item[0] }});">
+                    <span id = '{{item[0]}}star2' class="fa fa-star unchecked"></span>
+                </button>
+                <button onclick="rated(3,{{ item[0] }});">
+                    <span id = '{{item[0]}}star3' class="fa fa-star unchecked"></span>
+                </button>
+                <button onclick="rated(4,{{ item[0] }});">
+                    <span id = '{{item[0]}}star4' class="fa fa-star unchecked"></span>
+                </button>
+                <button onclick="rated(5,{{ item[0] }});">
+                    <span id = '{{item[0]}}star5' class="fa fa-star unchecked"></span>
+                </button>
+                <button class="btn btn-secondary" onclick="clearall({{ item[0] }})">Clear All</button>
+            </div>
+            <!-- Rating Thing Ends Here -->
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <!-- card column ends here.. -->
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Recommend Button -->
+<div  style="position: fixed; top: 2%; right: 0.5%;">
+    <button class="btn btn-primary" onclick="CheckRated()"> Recommend </button>
+</div>
+
+<!-- Counter Display -->
+<div style="position: fixed; bottom: 1%; right: 2%;">
+    <h1 id='counter'> </h1>
+</div>
+
+<!-- Basic Instruction -->
+
+<div style="text-align: center;">
+    <h5> Rate Your Favorite Movies </h5>
+    <h5> Then Click on the Recommend Button </h5>
+</div>
+
+<!-- Main Body -->
+<div id="main-div">
+<div class="card-columns">
+{% for item in results %}
+    <div class="card" style="width: 30rem;height: 18rem;">
+        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+        <div class="card-body">
+        <h5 class="card-title">{{ item[2] }}</h5>
+        <p class="card-text">Release year {{ item[1] }}</p>
+        <!-- <span class="btn btn-primary">Rate it</span> -->
+
+        <!-- Rating Thing  -->
+
+        <div>
+            <button onclick="rated(1,{{ item[0] }});">
+                <span id = '{{item[0]}}star1' class="fa fa-star unchecked"></span>
+            </button>
+            <button onclick="rated(2,{{ item[0] }});">
+                <span id = '{{item[0]}}star2' class="fa fa-star unchecked"></span>
+            </button>
+            <button onclick="rated(3,{{ item[0] }});">
+                <span id = '{{item[0]}}star3' class="fa fa-star unchecked"></span>
+            </button>
+            <button onclick="rated(4,{{ item[0] }});">
+                <span id = '{{item[0]}}star4' class="fa fa-star unchecked"></span>
+            </button>
+            <button onclick="rated(5,{{ item[0] }});">
+                <span id = '{{item[0]}}star5' class="fa fa-star unchecked"></span>
+            </button>
+            <button class="btn btn-secondary" onclick="clearall({{ item[0] }})">Clear All</button>
+        </div>
+        <!-- Rating Thing Ends Here -->
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<!-- card column ends here.. -->
+</div>
+
+
+
+
+
+<!-- Script Goes Here -->
+<script>
+    var rating = 0;
+    var totalRated = [];
+    var results = null;
+    document.getElementById('counter').innerHTML = String(totalRated.length)
+
+    function CheckRated(){
+        if(totalRated.length < 1){
+            alert("Please Rate More");
+        }
+        else{
+            window.location = "/recommendation";
+        }
+    }
+     
+    // Function to Give Rating
+    function rated(value, itemid){
+        rating = value;
+        for(var i = 1; i <= value; i++){
+            document.getElementById(itemid+'star'+String(i)).className = 'fa fa-star checked';
+        }
+        for(var i = value+1; i <= 5; i++){
+            document.getElementById(itemid+'star'+String(i)).className = 'fa fa-star unchecked';
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/setRating',
+            data: {'rating':rating, 'id':itemid},
+            success: function(){ console.log('Done..')},
+            error: function(){
+                console.log('Error..')
+            }
+        });
+        if(! totalRated.includes(itemid)){
+            totalRated.push(itemid)
+            document.getElementById('counter').innerHTML = String(totalRated.length)
+        }  
+    };
+
+    // Function to clear all rating
+    function clearall(itemid){
+        rating = 0;
+        for(var i = 1; i <= 5; i++){
+            // console.log(i, 'star'+String(i))
+            document.getElementById(String(itemid)+'star'+String(i)).className = 'fa fa-star unchecked';
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/setRating',
+            data: {'rating':rating, 'id':itemid},
+            success: function(){ console.log('Done..')}
+        });
+        if(totalRated.includes(itemid)){
+            totalRated.splice(totalRated.indexOf(itemid), 1)
+            document.getElementById('counter').innerHTML = String(totalRated.length)
+        }
+    }
+
+    $(document).ready(function(){
+        if(totalRated.length == 10){
+            alert('You can get recommendation by clicking the Button at right Top.')
+            }
+    })
+
+    function UpdateIndex(){
+        $.ajax({
+            type: 'POST',
+            url: '/search',
+            data: {'query':$('#search').val()},
+            success: function(data){
+                $('#main-div').html(data);
+            },
+            error: function(){
+                console.log('Error is ajax');
+            }
+        })
+    }
+</script>
+{% endblock %}

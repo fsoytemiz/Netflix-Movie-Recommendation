@@ -1,0 +1,67 @@
+<html>
+    <head>  
+        <meta charset = "UTF-8">  
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">  
+        <title> Movie Recommendation System </title>  
+        <!--  Add Bootstrap cdn  -->  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
+        <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+        <!--  Add bootstrap icon Library  -->  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+        <style>  
+            .checked {  
+                color : orange;  
+                font-size : 20;  
+            }  
+            .unchecked {  
+                color: gray;
+                font-size : 20;  
+            }  
+        </style>  
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Movie Recommendation Engine          </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('Home') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('About') }}">About Us</a>
+                </li> 
+                <!-- <li class="nav-item">
+                  <a class="nav-link btn disabled" href="{{ url_for('recommendation', user_id=123) }}">Recommendation</a>
+                </li> -->
+              </ul>
+              <!-- <form > -->
+                <input id='search' type="search" placeholder="Search" name='search' aria-label="Search">
+                <button id = 'searchBtn'class="btn btn-outline-success my-2 my-sm-0" onclick="UpdateIndex()" type="submit">Search</button>
+              <!-- </form> -->
+            </div>
+          </nav>
+
+          <!-- actual block -->
+          {% block content %}
+          {% endblock %}
+
+          <!-- footer -->
+    </body>
+    <script>
+      $('#search').keyup(function(event){
+        if(event.keyCode == 13){
+          $("#searchBtn").click();
+        }
+      })
+    </script>
+</html>
