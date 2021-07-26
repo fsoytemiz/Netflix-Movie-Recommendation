@@ -21,7 +21,7 @@ The data was extracted from the Kaggle:
    * [Recommendation](https://github.com/fsoytemiz/Netflix-Movie-Recommendation/blob/main/Notebooks/Recommendation.ipynb)
    
 3. Documents: This folder contains project documentation.
-   * [Final Report](https://github.com/fsoytemiz/Netflix-Movie-Recommendation/blob/main/Documents/Neflix%20Movie%20Recommendation%20System%20-%20Report.pdf)
+   * [Final Report](https://github.com/fsoytemiz/Netflix-Movie-Recommendation/blob/main/Documents/Neflix%20Movie%20Recommendation%20-%20Report.pdf)
    * [Presentation](https://github.com/fsoytemiz/Netflix-Movie-Recommendation/blob/main/Documents/Netflix%20Movie%20Recommendation%20System%20-%20Presentation.pdf)
    
 
